@@ -1,0 +1,8 @@
+error.add.title.required=<li>タイトルを入力してください。</li>
+error.add.author.required=<li>著者を入力してください。</li>
+error.add.publisher.required=<li>出版社を入力してください。</li>
+error.add.publicationDate.required=<li>出版日を入力してください。</li>
+error.bookid.invalid=<li>図書IDが無効です。</li>
+error.password.mismatch=<li>パスワードが違います。</li>
+error.password.failure=<li>認証に失敗しました。管理者に連絡してください。<font size='-2' color='gray'>({0})</font></li>
+error.sql.failure=<li>データベースを更新できませんでした。管理者に連絡してください。<font size='-2' color='gray'>({0})</font></li>

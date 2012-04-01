@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+ <form-beans>
+  <form-bean name="addBookForm"
+             type="jp.bcat.form.EditBookForm" />
+  <form-bean name="deleteBookForm"
+            dynamic="true"
+            type="org.apache.struts.action.DynaActionForm">
+   <form-property name="step" type="java.lang.String"/>
+   <form-property name="bookId" type="java.lang.String"/>
+   <form-property name="password" type="java.lang.String"/>
+  </form-bean>
+  <form-bean name="editBookForm"
+             type="jp.bcat.form.EditBookForm" />
+  <form-bean name="searchBookForm"
+            dynamic="true"
+            type="org.apache.struts.action.DynaActionForm">
+   <form-property name="word" type="java.lang.String" />
+   <form-property name="where" type="java.lang.String" />
+  </form-bean>
+  <form-bean name="takeoutBookForm"
+            dynamic="true"
+            type="org.apache.struts.action.DynaActionForm">
+   <form-property name="bookId" type="java.lang.String" />
+   <form-property name="step" type="java.lang.String" />
+  </form-bean>
+  <form-bean name="returnBookForm"
+            dynamic="true"
+            type="org.apache.struts.action.DynaActionForm">
+   <form-property name="bookId" type="java.lang.String" />
+   <form-property name="step" type="java.lang.String" />
+  </form-bean>
+  <form-bean name="loginForm"
+             type="jp.bcat.form.LoginForm" />
+ </form-beans>
+ <global-forwards>
+  <forward name="top" path="/index.jsp" />
+  <forward name="add" path="/addForm.jsp" />
+  <forward name="list" path="/list.do" />
+  <forward name="search" path="/searchForm.jsp" />
+  <forward name="return" path="/listTakingout.do" />
+  <forward name="login" path="/loginForm.jsp" />
+  <forward name="logout" path="/logout.do" />
+  <forward name="success" path="/index.jsp" />
+ </global-forwards>
+ <action-mappings>
+  <action path="/add"
+          type="jp.bcat.action.AddAction"
+          attribute="addBookForm"
+          name="addBookForm"
+          input="inputForm">
+   <forward name="inputForm" path="/addForm.jsp" />
+   <forward name="confirmForm"
+            path="/WEB-INF/pages/confirmAddForm.jsp" />
+   <forward name="success"
+            path="/WEB-INF/pages/addSuccess.jsp" />
+  </action>
+  <action path="/delete"
+          type="jp.bcat.action.DeleteAction"
+          name="deleteBookForm"
+          validate="false">
+   <forward name="confirmForm"
+            path="/WEB-INF/pages/confirmDeleteForm.jsp" />
+   <forward name="success"
+            path="/WEB-INF/pages/deleteSuccess.jsp" />
+   <forward name="failure"
+            path="/WEB-INF/pages/failure.jsp" />
+  </action>
+  <action path="/edit"
+          type="jp.bcat.action.EditAction"
+          attribute="editBookForm"
+          name="editBookForm"
+          input="inputForm">
+   <forward name="inputForm"
+            path="/WEB-INF/pages/editForm.jsp" />
+   <forward name="confirmForm"
+            path="/WEB-INF/pages/confirmEditForm.jsp" />
+   <forward name="success"
+            path="/WEB-INF/pages/editSuccess.jsp" />
+  </action>
+  <action path="/list"
+          type="jp.bcat.action.ListAction"
+          validate="false">
+    <forward name="success"
+             path="/WEB-INF/pages/searchResult.jsp" />
+  </action>
+  <action path="/search"
+          type="jp.bcat.action.SearchAction"
+          name="searchBookForm"
+          input="inputForm"
+          validate="false">
+   <forward name="inputForm" path="/searchForm.jsp" />
+   <forward name="success"
+            path="/WEB-INF/pages/searchResult.jsp" />
+  </action>
+  <action path="/takeout"
+          type="jp.bcat.action.TakeoutAction"
+          name="takeoutBookForm"
+          validate="false">
+   <forward name="confirmForm"
+            path="/WEB-INF/pages/confirmTakeoutForm.jsp" />
+   <forward name="success"
+            path="/WEB-INF/pages/takeoutSuccess.jsp" />
+  </action>
+  <action path="/return"
+          type="jp.bcat.action.ReturnAction"
+          name="returnBookForm"
+          validate="false">
+   <forward name="confirmForm"
+            path="/WEB-INF/pages/confirmReturnForm.jsp" />
+   <forward name="success"
+            path="/WEB-INF/pages/returnSuccess.jsp" />
+  </action>
+  <action path="/listTakingout"
+          type="jp.bcat.action.ListTakingoutAction">
+   <forward name="success"
+            path="/WEB-INF/pages/listTakingoutResult.jsp"/>
+  </action>
+  <action path="/login"
+          type="jp.bcat.action.LoginAction"
+          name="loginForm"
+          scope="request"
+          input="login"
+          validate="false">
+   <forward name="success"
+            path="/index.jsp" redirect="true" />
+  </action>
+  <action path="/logout"
+          type="jp.bcat.action.LogoutAction">
+   <forward name="success"
+            path="/WEB-INF/pages/logoutSuccess.jsp" />
+  </action>
+ </action-mappings>
+ <controller>
+  <set-property property="inputForward" value="true" />
+ </controller>
+ <message-resources
+     parameter="jp.bcat.ApplicationResources" />
+</struts-config>
